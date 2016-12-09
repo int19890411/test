@@ -1,0 +1,20 @@
+{
+  "name": "test-production",
+  "version": "0.0.1",
+  "mysql": {
+    "database": "company",
+    "username": "admin",
+    "password": "roman123likemysql",
+    "options": {
+      "host": "localhost",
+      "port": "3306",
+      "logging": false,
+      "pool": {
+        "minConnections": "5",
+        "maxConnections": "25",
+        "maxIdleTime": "30000"
+      }
+    }
+  },
+  "cluster": true
+}

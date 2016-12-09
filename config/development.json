@@ -1,0 +1,20 @@
+{
+  "name": "test-staging",
+  "version": "0.0.1",
+  "mysql": {
+    "database": "company",
+    "username": "root",
+    "password": "root",
+    "options": {
+      "host": "localhost",
+      "port": "3306",
+      "logging": true,
+      "pool": {
+        "minConnections": "1",
+        "maxConnections": "5",
+        "maxIdleTime": "30000"
+      }
+    }
+  },
+  "cluster": false
+}
