@@ -27,6 +27,11 @@ class NavBar extends Component {
                             <NavItem>Workers</NavItem>
                         </LinkContainer>
                     </Nav>
+                    <Nav pullRight>
+                        <LinkContainer to="/login" activeHref="active">
+                            <NavItem>Login</NavItem>
+                        </LinkContainer>
+                    </Nav>
                 </Navbar.Collapse>
             </Navbar>
         );

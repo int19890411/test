@@ -10,6 +10,7 @@ import Store from './store';
 
 import Workers from './pages/Workers.jsx';
 import Home from './pages/Home.jsx';
+import Login from './pages/Login.jsx';
 
 import {Router, Route, IndexRoute, Link, hashHistory} from 'react-router'
 /*
@@ -28,6 +29,7 @@ ReactDOM.render(
                 <IndexRoute component={Home}/>
                 <Route path="/workers" component={Workers}/>
                 <Route path="/home" component={Home}/>
+                <Route path="/login" component={Login}/>
             </Route>
         </Router>
     </Provider>,

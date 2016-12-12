@@ -1,12 +1,22 @@
 var express = require('express');
+
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var winston = require('./libs/winston');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+
+var passport = require('passport');
+
+var RedisStore = require('connect-redis')(session);
+var redisClient = require("redis").createClient();
+
 var config = require('./config');
 var index = require('./routes/index');
+
+var models = require('./models');
 
 var app = express();
 
@@ -24,6 +34,24 @@ if (config.get('NODE_ENV') === 'development') {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use(session({
+    secret: 'keyboard cat',
+    store: new RedisStore({
+        host: 'localhost',
+        client: redisClient,
+        port: 6379,
+        ttl: 300
+    }),
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(models.admin.createStrategy());
+passport.serializeUser(models.admin.serializeUser());
+passport.deserializeUser(models.admin.deserializeUser());
+
 app.use(express.static(path.join(__dirname, 'public'), {
     maxAge: 1209600000
 }));
@@ -49,9 +77,9 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.send(err);
     /*res.render('error', {
-        message: err.message,
-        error: req.app.get('env') === 'development' ? err : {}
-    });*/
+     message: err.message,
+     error: req.app.get('env') === 'development' ? err : {}
+     });*/
 });
 
 module.exports = app;

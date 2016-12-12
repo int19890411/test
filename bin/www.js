@@ -88,7 +88,7 @@ function startCluster() {
         });
     }
 }
-/*Пытался сделать мягкий рестарт cluster.worker.send({killWorkers: true}) Каждый worker перезагружается поочереди. Таким образом сервер всегда онлайн.*/
+/*пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ cluster.worker.send({killWorkers: true}) пїЅпїЅпїЅпїЅпїЅпїЅ worker пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.*/
 var onExitWorker = function (worker, code, signal) {
     if (worker.suicide === true) {
         logger.info(new Date() + ' Worker committed suicide ' + signal);
