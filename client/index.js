@@ -11,25 +11,29 @@ import Store from './store';
 import Workers from './pages/Workers.jsx';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
+import PNF from './pages/NotFound.jsx';
 
 import {Router, Route, IndexRoute, Link, hashHistory} from 'react-router'
-/*
- ReactDOM.render(
- <App/>
- ,
- document.getElementById("root")
- )
- */
+
+function checkAuth(nextState, replace) {
+    const authorized = Store.getState().auth.authorized || false;
+    if (!authorized) {
+        replace('/login');
+    }
+}
 
 
 ReactDOM.render(
     <Provider store={Store}>
         <Router history={hashHistory}>
             <Route path="/" component={App}>
-                <IndexRoute component={Home}/>
-                <Route path="/workers" component={Workers}/>
-                <Route path="/home" component={Home}/>
                 <Route path="/login" component={Login}/>
+                <Route onEnter={checkAuth}>
+                    <IndexRoute component={Home}/>
+                    <Route path="/workers" component={Workers}/>
+                    <Route path="/home" component={Home}/>
+                </Route>
+                <Route path="*" component={PNF}/>
             </Route>
         </Router>
     </Provider>,

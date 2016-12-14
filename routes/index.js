@@ -39,7 +39,7 @@ router.post('/login', function (req, res, next) {
             return next(err);
         }
         if (!admin) {
-            return res.status(401).send({error: "Not found admin"});
+            return res.status(401).send({message: "Email or password is not correct"});
         }
         req.logIn(admin, function (err) {
             if (err) {

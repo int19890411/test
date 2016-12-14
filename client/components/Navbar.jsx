@@ -9,6 +9,15 @@ import {Link} from 'react-router';
 import {IndexLinkContainer, LinkContainer} from 'react-router-bootstrap';
 
 class NavBar extends Component {
+    getLoginLink() {
+        let {username} = this.props;
+        return username ?
+            <NavItem>{username}</NavItem> :
+            <LinkContainer to="/login" activeHref="active">
+                <NavItem>Login</NavItem>
+            </LinkContainer>;
+    }
+
     render() {
         return (
             <Navbar collapseOnSelect>
@@ -28,9 +37,7 @@ class NavBar extends Component {
                         </LinkContainer>
                     </Nav>
                     <Nav pullRight>
-                        <LinkContainer to="/login" activeHref="active">
-                            <NavItem>Login</NavItem>
-                        </LinkContainer>
+                        {::this.getLoginLink()}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

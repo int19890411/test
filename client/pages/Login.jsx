@@ -2,12 +2,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {login, changeLoginForm} from '../actions/appActions.js'
-import LoginFrom from '../components/Login.jsx'
-
-
-import Table from 'react-bootstrap/lib/Table';
-import Pagination from 'react-bootstrap/lib/Pagination';
-import Time from 'react-time';
+import LoginForm from '../components/LoginForm.jsx'
+import {hashHistory} from 'react-router';
 
 class Login extends Component {
     _handleLogin(email, password, isRemember) {
@@ -18,16 +14,25 @@ class Login extends Component {
         this.props.dispatch(changeLoginForm(newState));
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.data.authorized) {
+            hashHistory.push('/home');
+        }
+    }
+
     render() {
-        const {formState} = this.props.data;
+        const {formState, pending, error} = this.props.data;
         return (
-            <LoginFrom data={formState} onChange={::this._handleChangeForm} onSubmit={::this._handleLogin}/>
+            <LoginForm data={formState}
+                       onChange={::this._handleChangeForm}
+                       onSubmit={::this._handleLogin}
+                       pending={pending}
+                       error={error}
+            />
         );
     }
 }
 
-export default connect(
-    (store) => ({
-        data: store.login,
-    })
-)(Login)
+export default connect(store => ({
+    data: store.auth
+}))(Login)

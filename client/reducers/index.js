@@ -5,12 +5,12 @@
 import {combineReducers} from 'redux';
 import workers from './workers';
 import times from './times';
-import login from './login';
+import auth from './auth';
 
 const combineReduser = combineReducers({
     workers,
     times,
-    login
+    auth
 })
 
 export default combineReduser

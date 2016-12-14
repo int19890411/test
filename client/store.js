@@ -9,6 +9,11 @@ import promise from "redux-promise-middleware"
 
 import reducer from './reducers'
 
-const middleware = applyMiddleware(promise(), thunk, logger())
+const NODE_ENV = process.env.NODE_ENV || "development";
+let middleware = [promise(), thunk];
 
-export default createStore(reducer, middleware);
+if (NODE_ENV !== 'production') {
+    middleware = [...middleware, logger()];
+}
+
+export default createStore(reducer, applyMiddleware(...middleware));
