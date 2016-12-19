@@ -20,20 +20,20 @@ import axios from 'axios'
 export function fetchWorkers(page) {
     return {
         type: "FETCH_WORKERS",
-        payload: axios.get("/workers", {params: {page: page}})
+        payload: axios.get("/api/workers", {params: {page: page}})
     }
 }
 export function saveOrCreateWorker(worker) {
     return {
         type: "SAVE_WORKER",
-        payload: axios.post(`/workers/${worker.id}/save`, worker)
+        payload: axios.post(`/api/workers/${worker.id}/save`, worker)
     }
 }
 
 export function removeWorker(workerId) {
     return {
         type: "REMOVE_WORKER",
-        payload: axios.post(`/workers/${workerId}/delete`),
+        payload: axios.post(`/api/workers/${workerId}/delete`),
         meta: {workerId: workerId},
     }
 }

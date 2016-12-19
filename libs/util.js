@@ -1,3 +1,5 @@
+var crypto = require('crypto');
+
 var util = {
     getLimit: function (page, user_count) {
         if (!isNaN(page)) {

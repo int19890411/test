@@ -16,5 +16,6 @@
       }
     }
   },
+  "jwtSecret": "LwykXvm1G8cQxi",
   "cluster": true
 }

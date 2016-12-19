@@ -8,10 +8,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
-var passport = require('passport');
-
-var RedisStore = require('connect-redis')(session);
-var redisClient = require("redis").createClient();
+//var passport = require('passport');
+//var RedisStore = require('connect-redis')(session);
+//var redisClient = require("redis").createClient();
 
 var config = require('./config');
 var index = require('./routes/index');
@@ -33,34 +32,41 @@ if (config.get('NODE_ENV') === 'development') {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
-app.use(session({
-    secret: 'keyboard cat',
-    store: new RedisStore({
-        host: 'localhost',
-        client: redisClient,
-        port: 6379,
-        ttl: 300
-    }),
-    resave: false,
-    saveUninitialized: false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
 
-passport.use(models.admin.createStrategy());
-passport.serializeUser(models.admin.serializeUser());
-passport.deserializeUser(models.admin.deserializeUser());
+/*
+ app.use(cookieParser());
+ app.use(session({
+ secret: 'keyboard cat',
+ store: new RedisStore({
+ host: 'localhost',
+ client: redisClient,
+ port: 6379,
+ ttl: 300
+ }),
+ resave: false,
+ saveUninitialized: false
+ }));
+
+ app.use(passport.initialize());
+ app.use(passport.session());
+
+ passport.use(models.admin.createStrategy());
+ passport.serializeUser(models.admin.serializeUser());
+ passport.deserializeUser(models.admin.deserializeUser());
+ */
 
 app.use(express.static(path.join(__dirname, 'public'), {
-    maxAge: 1209600000
+    maxAge: 1//209600000
 }));
 
 app.use("/", express.static(path.join(__dirname, '/node_modules/bootstrap/dist/'), {
     maxAge: 1209600000
 }));
 
-app.use('/', index);
+app.use('/api', index);
+app.get("*", function (req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+})
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -73,13 +79,8 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
     winston.error(req.url + " " + err.message);
 
-    // render the error page
     res.status(err.status || 500);
-    res.send(err);
-    /*res.render('error', {
-     message: err.message,
-     error: req.app.get('env') === 'development' ? err : {}
-     });*/
+    res.send({error: err.message});
 });
 
 module.exports = app;

@@ -6,17 +6,18 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
 import {Provider} from 'react-redux';
-import Store from './store';
+import store from './store';
 
 import Workers from './pages/Workers.jsx';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import PNF from './pages/NotFound.jsx';
+import axios from 'axios';
 
-import {Router, Route, IndexRoute, Link, hashHistory} from 'react-router'
+import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 
 function checkAuth(nextState, replace) {
-    const authorized = Store.getState().auth.authorized || false;
+    const authorized = store.getState().auth.authorized || false;
     if (!authorized) {
         replace('/login');
     }
@@ -24,8 +25,8 @@ function checkAuth(nextState, replace) {
 
 
 ReactDOM.render(
-    <Provider store={Store}>
-        <Router history={hashHistory}>
+    <Provider store={store}>
+        <Router history={browserHistory}>
             <Route path="/" component={App}>
                 <Route path="/login" component={Login}/>
                 <Route onEnter={checkAuth}>

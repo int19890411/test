@@ -23,8 +23,8 @@ const reducer = (state = initialState, action) => {
             return {...state, pending: true}
         case 'LOGIN_REJECTED':
             let message = `Error ${action.payload.response.status}: `;
-            if (action.payload.response && action.payload.response.data && action.payload.response.data.message) {
-                message += action.payload.response.data.message;
+            if (action.payload.response && action.payload.response.data && action.payload.response.data.error) {
+                message += action.payload.response.data.error;
             }
             return {...state, pending: false, error: message}
         case 'LOGIN_FULFILLED':

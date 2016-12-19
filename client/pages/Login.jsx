@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {login, changeLoginForm} from '../actions/appActions.js'
 import LoginForm from '../components/LoginForm.jsx'
-import {hashHistory} from 'react-router';
+import {browserHistory} from 'react-router';
 
 class Login extends Component {
     _handleLogin(email, password, isRemember) {
@@ -16,7 +16,7 @@ class Login extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.data.authorized) {
-            hashHistory.push('/home');
+            browserHistory.push('/home');
         }
     }
 
