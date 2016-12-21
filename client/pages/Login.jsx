@@ -1,7 +1,7 @@
 "use strict";
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {login, changeLoginForm} from '../actions/appActions.js'
+import {login, changeLoginForm} from '../actions/authActions.js'
 import LoginForm from '../components/LoginForm.jsx'
 import {browserHistory} from 'react-router';
 
@@ -15,8 +15,9 @@ class Login extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.data.authorized) {
-            browserHistory.push('/home');
+        if (nextProps.data.isAuthenticated) {
+            const redirectRoute = nextProps.location.query.next || '/';
+            browserHistory.push(redirectRoute);
         }
     }
 
@@ -33,6 +34,10 @@ class Login extends Component {
     }
 }
 
-export default connect(store => ({
-    data: store.auth
-}))(Login)
+export default connect(
+    (store) => {
+        return {
+            data: store.auth
+        }
+    }
+)(Login)

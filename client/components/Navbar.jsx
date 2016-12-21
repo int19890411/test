@@ -1,24 +1,30 @@
 "use strict";
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
-import NavDropdown from 'react-bootstrap/lib/NavDropdown';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
-import {Link} from 'react-router';
-import {IndexLinkContainer, LinkContainer} from 'react-router-bootstrap';
+import {IndexLinkContainer, LinkContainer} from 'react-router-bootstrap'
 
 class NavBar extends Component {
-    getLoginLink() {
-        let {username} = this.props;
-        return username ?
-            <NavItem>{username}</NavItem> :
-            <LinkContainer to="/login" activeHref="active">
-                <NavItem>Login</NavItem>
-            </LinkContainer>;
-    }
-
     render() {
+        const {isAuthenticated} = this.props;
+        const userLinks = (
+            <Nav pullRight>
+                <LinkContainer to="/logout">
+                    <NavItem>Logout</NavItem>
+                </LinkContainer>
+            </Nav>
+        );
+
+        const guestLinks = (
+            <Nav pullRight>
+                <LinkContainer to="/login">
+                    <NavItem>Login</NavItem>
+                </LinkContainer>
+            </Nav>
+        );
+
         return (
             <Navbar collapseOnSelect>
                 <Navbar.Header>
@@ -29,20 +35,26 @@ class NavBar extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav>
-                        <IndexLinkContainer to="/" activeHref="active">
+                        <IndexLinkContainer to="/">
                             <NavItem>Home</NavItem>
                         </IndexLinkContainer>
-                        <LinkContainer to="/workers" activeHref="active">
+                        <LinkContainer to="/workers">
                             <NavItem>Workers</NavItem>
                         </LinkContainer>
                     </Nav>
-                    <Nav pullRight>
-                        {::this.getLoginLink()}
-                    </Nav>
+                    {isAuthenticated ? userLinks : guestLinks}
                 </Navbar.Collapse>
             </Navbar>
         );
     }
 }
-export default NavBar;
+
+export default connect((store) => {
+        return {
+            isAuthenticated: store.auth.isAuthenticated,
+        }
+    }, null, null, {
+        pure: false
+    }
+)(NavBar);
 

@@ -96,14 +96,6 @@ class LoginForm extends Component {
 
                 <FormGroup>
                     <Col smOffset={2} sm={10}>
-                        <Checkbox onChange={::this._changeRemember} inputRef={ref => {
-                            this.fRemember = ref;
-                        }}>Remember me</Checkbox>
-                    </Col>
-                </FormGroup>
-
-                <FormGroup>
-                    <Col smOffset={2} sm={10}>
                         <Button type="submit" disabled={pending}>
                             {pending ? 'Loading...' : 'Sign in'}
                         </Button>
@@ -112,6 +104,15 @@ class LoginForm extends Component {
                 {alert}
             </Form>
         )
+        /*
+         <FormGroup>
+         <Col smOffset={2} sm={10}>
+         <Checkbox onChange={::this._changeRemember} inputRef={ref => {
+         this.fRemember = ref;
+         }}>Remember me</Checkbox>
+         </Col>
+         </FormGroup>
+         */
     }
 }
 
