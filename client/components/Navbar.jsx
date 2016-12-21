@@ -49,12 +49,7 @@ class NavBar extends Component {
     }
 }
 
-export default connect((store) => {
-        return {
-            isAuthenticated: store.auth.isAuthenticated,
-        }
-    }, null, null, {
-        pure: false
-    }
-)(NavBar);
+export default connect((store) => ({
+    isAuthenticated: store.auth.isAuthenticated,
+}), null, null, {pure: false})(NavBar);
 

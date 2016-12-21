@@ -4,7 +4,6 @@ import _ from 'lodash';
 /* bootstrap */
 import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
-import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import Form from 'react-bootstrap/lib/Form';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
@@ -14,7 +13,6 @@ import Row from 'react-bootstrap/lib/Row';
 import Checkbox from 'react-bootstrap/lib/Checkbox';
 
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
-import DatePicker from 'react-bootstrap-date-picker';
 
 class LoginForm extends Component {
 
