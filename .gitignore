@@ -3,7 +3,7 @@ public/app*.log
 public/javascripts/all-*.js
 public/stylesheets/all-*.css
 public/rev-manifest.json
-public/build/*
+public/build/bundle.js
 dist/*.js
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
