@@ -2,7 +2,7 @@
  * Created by PC10 on 07.12.2016.
  */
 import axios from 'axios'
-import {setAuthorizationToken} from '../utils/setAuthorizationToken.js'
+import {setAuthorizationToken} from '../utils/authorizationToken.js'
 
 export function changeLoginForm(newState) {
     return {

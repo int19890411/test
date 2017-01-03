@@ -14,18 +14,19 @@ import Login from './pages/Login.jsx'
 import Logout from './pages/Logout.jsx'
 import PNF from './pages/NotFound.jsx'
 import {loginFulfilled} from './actions/authActions.js'
-
+var jwtDecode = require('jwt-decode')
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 
 let token = localStorage.getItem('jwtToken');
-if (token) {
+var decode = jwtDecode(token);
+if (token && decode && decode.exp > new Date().getTime()) {
     store.dispatch(loginFulfilled(token));
 }
 
 
 function checkAuth(nextState, replace) {
-    const authorized = store.getState().auth.isAuthenticated || false;
+    let authorized = store.getState().auth.isAuthenticated || false;
     if (!authorized) {
         const redirectAfterLogin = nextState.location.pathname;
         replace(`/login?next=${redirectAfterLogin}`);
