@@ -19,9 +19,12 @@ var jwtDecode = require('jwt-decode')
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 
-let token = localStorage.getItem('jwtToken');
-var decode = jwtDecode(token);
-if (token && decode && decode.exp > new Date().getTime()/1000) {
+var token = localStorage.getItem('jwtToken');
+var decode;
+if (token) {
+    decode = jwtDecode(token);
+}
+if (token && decode && decode.exp > new Date().getTime() / 1000) {
     store.dispatch(loginFulfilled(token));
 }
 
