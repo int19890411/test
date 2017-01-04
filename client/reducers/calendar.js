@@ -80,24 +80,4 @@ const reducer = (state = initialState, action) => {
     }
 }
 
-function normalizeIntervals(array) {
-    array.sort((a, b) => {
-        if (a.bt < b.bt) {
-            return -1;
-        }
-        if (a.bt > b.bt) {
-            return 1;
-        }
-        return 0;
-    })
-
-    for (var i = 0; i < array.length; i++) {
-        if (array[i + 1] && array[i].et == array[i + 1].bt - 1) {
-            array[i].et = array[i + 1].et;
-            array.splice(i + 1, 1);
-            i--;
-        }
-    }
-}
-
 export default reducer
