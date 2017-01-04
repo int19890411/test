@@ -1,0 +1,47 @@
+.weekly table {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    width: 100%;
+}
+
+.weekly table tr td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    background-color: #eee;
+}
+
+.weekly table td.selected {
+    background-color: #8fa5bd;
+}
+
+.weekly table td.name {
+    text-transform: uppercase;
+}
+
+.weekly table td.all-day {
+    background-color: #355b81;
+    min-width: 34px;
+    text-align: center;
+    color: #fff;
+}
+
+.weekly button {
+    margin: 8px;
+    margin-right: 0px;
+}
+
+.weekly table tr.th td {
+    border: none;
+    font-size: small;
+    color: #777;
+    padding: 0;
+    background-color: transparent;
+}
+
+.weekly table tr.space td {
+    border: none;
+    border-left: 1px solid #777;
+    padding: 3px;
+    background-color: transparent;
+}

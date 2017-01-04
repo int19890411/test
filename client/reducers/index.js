@@ -6,10 +6,12 @@ import {combineReducers} from 'redux';
 import workers from './workers';
 import times from './times';
 import auth from './auth';
+import calendar from './calendar';
 
 const combineReduser = combineReducers({
     workers,
     times,
+    calendar,
     auth
 })
 

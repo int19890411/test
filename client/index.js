@@ -12,6 +12,7 @@ import Workers from './pages/Workers.jsx'
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
 import Logout from './pages/Logout.jsx'
+import Calendar from './pages/Calendar.jsx'
 import PNF from './pages/NotFound.jsx'
 import {loginFulfilled} from './actions/authActions.js'
 var jwtDecode = require('jwt-decode')
@@ -20,7 +21,7 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 
 let token = localStorage.getItem('jwtToken');
 var decode = jwtDecode(token);
-if (token && decode && decode.exp > new Date().getTime()) {
+if (token && decode && decode.exp > new Date().getTime()/1000) {
     store.dispatch(loginFulfilled(token));
 }
 
@@ -42,6 +43,7 @@ ReactDOM.render(
                 <Route onEnter={checkAuth}>
                     <IndexRoute component={Home}/>
                     <Route path="/workers" component={Workers}/>
+                    <Route path="/calendar" component={Calendar}/>
                 </Route>
                 <Route path="*" component={PNF}/>
             </Route>

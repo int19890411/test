@@ -41,6 +41,9 @@ class NavBar extends Component {
                         <LinkContainer to="/workers">
                             <NavItem>Workers</NavItem>
                         </LinkContainer>
+                        <LinkContainer to="/calendar">
+                            <NavItem>Calendar</NavItem>
+                        </LinkContainer>
                     </Nav>
                     {isAuthenticated ? userLinks : guestLinks}
                 </Navbar.Collapse>
