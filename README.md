@@ -11,7 +11,7 @@ http://89.33.7.154:3020/
 
 React.js+redux и сопуствующее. 
 
-#Тестовое задание 
+#Тестовое задание №2
 
 https://docs.google.com/document/d/1vzCZ8bCHyGGn2czmmav8L2EBzdOFfhCpyL6sqatHm-4/edit
 http://89.33.7.154:3020/calendar
